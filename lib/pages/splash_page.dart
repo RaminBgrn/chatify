@@ -1,5 +1,9 @@
+import 'package:chatify/pages/home_page.dart';
+import 'package:chatify/services/media_service.dart';
+import 'package:chatify/services/navigation_service.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:get_it/get_it.dart';
 
 class SplashPage extends StatefulWidget {
   final VoidCallback onInitComplete;
@@ -42,5 +46,8 @@ class _SplashPageState extends State<SplashPage> {
     _registerServices();
   }
 
-  void _registerServices() {}
+  void _registerServices() {
+    GetIt.instance.registerSingleton<NavigationService>(NavigationService());
+    GetIt.instance.registerSingleton<MediaService>(MediaService());
+  }
 }
