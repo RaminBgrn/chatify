@@ -1,4 +1,3 @@
-import 'package:chatify/pages/home_page.dart';
 import 'package:chatify/services/cloud_storage_service.dart';
 import 'package:chatify/services/database_service.dart';
 import 'package:chatify/services/media_service.dart';
@@ -19,7 +18,10 @@ class SplashPage extends StatefulWidget {
 class _SplashPageState extends State<SplashPage> {
   @override
   void initState() {
-    _setup().then((_) => widget.onInitComplete);
+    Future.delayed(const Duration(seconds: 2), () {
+      _setup().then((_) => widget.onInitComplete());
+    });
+
     super.initState();
   }
 

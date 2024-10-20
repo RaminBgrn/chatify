@@ -1,4 +1,6 @@
+import 'package:chatify/pages/home_page.dart';
 import 'package:chatify/pages/splash_page.dart';
+import 'package:chatify/services/navigation_service.dart';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -11,15 +13,20 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Flutter Demo',
+      title: 'Chatify',
       theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
+        colorScheme: ColorScheme.fromSeed(
+            seedColor: const Color.fromRGBO(36, 35, 49, 1.0)),
+        scaffoldBackgroundColor: const Color.fromRGBO(36, 35, 49, 1.0),
         useMaterial3: true,
       ),
       home: SplashPage(
         key: UniqueKey(),
-        onInitComplete: () {},
+        onInitComplete: () {
+          NavigationService().navigateToPage(const HomePage());
+        },
       ),
+      navigatorKey: NavigationService.navigatorKey,
     );
   }
 }
