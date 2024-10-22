@@ -1,4 +1,5 @@
 import 'package:chatify/widgets/custom_input_fields.dart';
+import 'package:chatify/widgets/rounded_button.dart';
 import 'package:flutter/material.dart';
 
 class LoginPage extends StatefulWidget {
@@ -37,7 +38,22 @@ class _LoginPageState extends State<LoginPage> {
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               _pageTitle(),
+              SizedBox(
+                height: _deviceHight * 0.04,
+              ),
               loginForm(),
+              SizedBox(
+                height: _deviceHight * 0.05,
+              ),
+              RoundedButton(
+                  title: 'Login',
+                  buttonHight: _deviceHight * 0.065,
+                  buttonWidth: _deviceWidth * 0.65,
+                  onPressed: () {}),
+              SizedBox(
+                height: _deviceHight * 0.002,
+              ),
+              registerAccountLink()
             ],
           ),
         ),
@@ -80,6 +96,19 @@ class _LoginPageState extends State<LoginPage> {
                 hintText: "Password",
                 obscure: true)
           ],
+        ),
+      ),
+    );
+  }
+
+  Widget registerAccountLink() {
+    return TextButton(
+      onPressed: () {},
+      child: const Text(
+        "Don't have an account ?",
+        style: TextStyle(
+          color: Colors.blue,
+          fontSize: 14,
         ),
       ),
     );
