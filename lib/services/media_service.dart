@@ -1,8 +1,7 @@
 import 'package:file_picker/file_picker.dart';
-import 'package:flutter/material.dart';
 
 class MediaService {
-  MediaService() {}
+  MediaService();
 
   Future<PlatformFile?> pickImageFromLibrary() async {
     FilePickerResult? mediaFile =
