@@ -18,10 +18,6 @@ class SplashPage extends StatefulWidget {
 class _SplashPageState extends State<SplashPage> {
   @override
   void initState() {
-    Future.delayed(const Duration(seconds: 2), () {
-      _setup().then((_) => widget.onInitComplete());
-    });
-
     super.initState();
   }
 
@@ -41,27 +37,6 @@ class _SplashPageState extends State<SplashPage> {
           ),
         ),
       ),
-    );
-  }
-
-  Future<void> _setup() async {
-    WidgetsFlutterBinding.ensureInitialized();
-    await Firebase.initializeApp();
-    _registerServices();
-  }
-
-  void _registerServices() {
-    GetIt.instance.registerSingleton<NavigationService>(
-      NavigationService(),
-    );
-    GetIt.instance.registerSingleton<MediaService>(
-      MediaService(),
-    );
-    GetIt.instance.registerSingleton<DatabaseService>(
-      DatabaseService(),
-    );
-    GetIt.instance.registerSingleton<CloudStorageService>(
-      CloudStorageService(),
     );
   }
 }

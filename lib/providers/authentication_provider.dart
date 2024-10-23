@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:chatify/services/database_service.dart';
 import 'package:chatify/services/navigation_service.dart';
 import 'package:flutter/material.dart';
@@ -13,5 +15,16 @@ class AuthenticationProvider extends ChangeNotifier {
     _auth = FirebaseAuth.instance;
     _navigationService = GetIt.instance.get<NavigationService>();
     _databaseService = GetIt.instance.get<DatabaseService>();
+  }
+
+  Future<void> loginUsingEmailAndPassword(String email, String password) async {
+    try {
+      await _auth.signInWithEmailAndPassword(email: email, password: password);
+      log(_auth.currentUser.toString());
+    } on FirebaseAuthException {
+      print('Error login in user into firebase');
+    } catch (e) {
+      print(e);
+    }
   }
 }

@@ -1,6 +1,13 @@
+import 'dart:developer';
+
+import 'package:chatify/providers/authentication_provider.dart';
+import 'package:chatify/services/navigation_service.dart';
 import 'package:chatify/widgets/custom_input_fields.dart';
 import 'package:chatify/widgets/rounded_button.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:get_it/get_it.dart';
+import 'package:provider/provider.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({super.key});
@@ -13,12 +20,20 @@ class _LoginPageState extends State<LoginPage> {
   late double _deviceHight;
   late double _deviceWidth;
 
+  late AuthenticationProvider _auth;
+  late NavigationService _navigationService;
+
   final _loginFormKey = GlobalKey<FormState>();
+
+  String? _email;
+  String? _password;
 
   @override
   Widget build(BuildContext context) {
     _deviceHight = MediaQuery.sizeOf(context).height;
     _deviceWidth = MediaQuery.sizeOf(context).width;
+    _auth = Provider.of<AuthenticationProvider>(context);
+    _navigationService = GetIt.instance.get<NavigationService>();
     return Scaffold(
       body: GestureDetector(
         onTap: () {
@@ -49,7 +64,13 @@ class _LoginPageState extends State<LoginPage> {
                   title: 'Login',
                   buttonHight: _deviceHight * 0.065,
                   buttonWidth: _deviceWidth * 0.65,
-                  onPressed: () {}),
+                  onPressed: () {
+                    if (_loginFormKey.currentState!.validate()) {
+                      _loginFormKey.currentState!.save();
+                      log("Email: $_email , Password: $_password");
+                      _auth.loginUsingEmailAndPassword(_email!, _password!);
+                    }
+                  }),
               SizedBox(
                 height: _deviceHight * 0.002,
               ),
@@ -83,15 +104,24 @@ class _LoginPageState extends State<LoginPage> {
         child: Column(
           mainAxisSize: MainAxisSize.max,
           crossAxisAlignment: CrossAxisAlignment.center,
-          mainAxisAlignment: MainAxisAlignment.spaceAround,
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             CustomInputFields(
-                onSaved: (str) {},
+                onSaved: (email) {
+                  setState(() {
+                    _email = email;
+                  });
+                },
                 regEx: r"^[a-zA-Z0-9.a-z-A-Z0-9.!#$%&'*+-/=?^_`{|}]",
                 hintText: "Email",
                 obscure: false),
+            const SizedBox(height: 10),
             CustomInputFields(
-                onSaved: (str) {},
+                onSaved: (password) {
+                  setState(() {
+                    _password = password;
+                  });
+                },
                 regEx: r".{8,}",
                 hintText: "Password",
                 obscure: true)
