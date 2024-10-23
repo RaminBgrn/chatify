@@ -1,3 +1,4 @@
+import 'package:chatify/pages/home_page.dart';
 import 'package:chatify/services/cloud_storage_service.dart';
 import 'package:chatify/services/database_service.dart';
 import 'package:chatify/services/media_service.dart';
@@ -7,9 +8,7 @@ import 'package:flutter/material.dart';
 import 'package:get_it/get_it.dart';
 
 class SplashPage extends StatefulWidget {
-  final VoidCallback onInitComplete;
-
-  const SplashPage({super.key, required this.onInitComplete});
+  const SplashPage({super.key});
 
   @override
   State<SplashPage> createState() => _SplashPageState();
@@ -18,7 +17,33 @@ class SplashPage extends StatefulWidget {
 class _SplashPageState extends State<SplashPage> {
   @override
   void initState() {
+    Future.delayed(const Duration(seconds: 2), () {
+      _setup().then((_) {
+        NavigationService().navigateToRoute('/login');
+      });
+    });
     super.initState();
+  }
+
+  Future<void> _setup() async {
+    WidgetsFlutterBinding.ensureInitialized();
+    await Firebase.initializeApp();
+    _registerServices();
+  }
+
+  void _registerServices() {
+    GetIt.instance.registerSingleton<NavigationService>(
+      NavigationService(),
+    );
+    GetIt.instance.registerSingleton<MediaService>(
+      MediaService(),
+    );
+    GetIt.instance.registerSingleton<DatabaseService>(
+      DatabaseService(),
+    );
+    GetIt.instance.registerSingleton<CloudStorageService>(
+      CloudStorageService(),
+    );
   }
 
   @override

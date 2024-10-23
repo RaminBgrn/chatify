@@ -1,4 +1,5 @@
 import 'package:chatify/pages/login_page.dart';
+import 'package:chatify/pages/splash_page.dart';
 import 'package:chatify/providers/authentication_provider.dart';
 import 'package:chatify/services/cloud_storage_service.dart';
 import 'package:chatify/services/database_service.dart';
@@ -10,25 +11,7 @@ import 'package:get_it/get_it.dart';
 import 'package:provider/provider.dart';
 
 void main() async {
-  WidgetsFlutterBinding.ensureInitialized();
-  await Firebase.initializeApp();
-  _registerServices();
   runApp(const MyApp());
-}
-
-void _registerServices() {
-  GetIt.instance.registerSingleton<NavigationService>(
-    NavigationService(),
-  );
-  GetIt.instance.registerSingleton<MediaService>(
-    MediaService(),
-  );
-  GetIt.instance.registerSingleton<DatabaseService>(
-    DatabaseService(),
-  );
-  GetIt.instance.registerSingleton<CloudStorageService>(
-    CloudStorageService(),
-  );
 }
 
 class MyApp extends StatelessWidget {
@@ -53,9 +36,10 @@ class MyApp extends StatelessWidget {
             useMaterial3: true,
           ),
           navigatorKey: NavigationService.navigatorKey,
-          initialRoute: "/login",
+          initialRoute: "/splash",
           routes: {
-            '/login': (BuildContext context) => const LoginPage(),
+            "/login": (_) => const LoginPage(),
+            "/splash": (_) => const SplashPage(),
           }),
     );
   }
