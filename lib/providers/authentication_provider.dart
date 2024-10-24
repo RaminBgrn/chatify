@@ -11,12 +11,11 @@ class AuthenticationProvider extends ChangeNotifier {
   late final FirebaseAuth _auth;
   late final NavigationService _navigationService;
   late final DatabaseService _databaseService;
-  late ChatUser _user;
+  late ChatUser userModel;
   AuthenticationProvider() {
     _auth = FirebaseAuth.instance;
     _navigationService = GetIt.instance.get<NavigationService>();
     _databaseService = GetIt.instance.get<DatabaseService>();
-
     _auth.authStateChanges().listen((user) {
       if (user != null) {
         _databaseService.updateUserLastSeenType(user.uid);
@@ -24,7 +23,7 @@ class AuthenticationProvider extends ChangeNotifier {
           (snapShop) {
             Map<String, dynamic> userData =
                 snapShop.data()! as Map<String, dynamic>;
-            _user = ChatUser.fromJSON(
+            userModel = ChatUser.fromJSON(
               {
                 'uid': user.uid,
                 'name': userData['name'],
@@ -33,11 +32,11 @@ class AuthenticationProvider extends ChangeNotifier {
                 'image': userData['image']
               },
             );
-            log(_user.name);
+            _navigationService.removeAndNavigateRoute('/home');
           },
         );
       } else {
-        log('Logged out');
+        _navigationService.removeAndNavigateRoute('/login');
       }
     });
   }

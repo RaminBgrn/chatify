@@ -1,3 +1,4 @@
+import 'package:chatify/pages/home_page.dart';
 import 'package:chatify/pages/login_page.dart';
 import 'package:chatify/pages/splash_page.dart';
 import 'package:chatify/providers/authentication_provider.dart';
@@ -38,8 +39,9 @@ class MyApp extends StatelessWidget {
           navigatorKey: NavigationService.navigatorKey,
           initialRoute: "/splash",
           routes: {
-            "/login": (_) => const LoginPage(),
             "/splash": (_) => const SplashPage(),
+            "/login": (_) => const LoginPage(),
+            "/home": (_) => const HomePage(),
           }),
     );
   }
