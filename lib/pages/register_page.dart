@@ -1,5 +1,6 @@
 import 'package:chatify/services/media_service.dart';
 import 'package:chatify/widgets/custom_input_fields.dart';
+import 'package:chatify/widgets/rounded_button.dart';
 import 'package:chatify/widgets/rounded_image_network.dart';
 import 'package:flutter/material.dart';
 import 'package:file_picker/file_picker.dart';
@@ -49,6 +50,15 @@ class _RegisterPage extends State<RegisterPage> {
               height: 28,
             ),
             _registerForm(),
+            const SizedBox(
+              height: 28,
+            ),
+            RoundedButton(
+              title: 'Register',
+              buttonHight: deviceHight * 0.065,
+              buttonWidth: deviceWidth * 0.65,
+              onPressed: () {},
+            ),
           ],
         ),
       ),
