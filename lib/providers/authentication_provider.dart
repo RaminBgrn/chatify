@@ -1,5 +1,6 @@
 import 'dart:developer';
 
+import 'package:chatify/models/chat_user.dart';
 import 'package:chatify/services/database_service.dart';
 import 'package:chatify/services/navigation_service.dart';
 import 'package:flutter/material.dart';
@@ -10,15 +11,31 @@ class AuthenticationProvider extends ChangeNotifier {
   late final FirebaseAuth _auth;
   late final NavigationService _navigationService;
   late final DatabaseService _databaseService;
-
+  late ChatUser _user;
   AuthenticationProvider() {
     _auth = FirebaseAuth.instance;
     _navigationService = GetIt.instance.get<NavigationService>();
     _databaseService = GetIt.instance.get<DatabaseService>();
+
     _auth.authStateChanges().listen((user) {
       if (user != null) {
         _databaseService.updateUserLastSeenType(user.uid);
-        _databaseService.getUser(user.uid);
+        _databaseService.getUser(user.uid).then(
+          (snapShop) {
+            Map<String, dynamic> userData =
+                snapShop.data()! as Map<String, dynamic>;
+            _user = ChatUser.fromJSON(
+              {
+                'uid': user.uid,
+                'name': userData['name'],
+                'email': userData['email'],
+                'last_active': userData['last_active'],
+                'image': userData['image']
+              },
+            );
+            log(_user.name);
+          },
+        );
       } else {
         log('Logged out');
       }
