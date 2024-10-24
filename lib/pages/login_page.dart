@@ -4,7 +4,6 @@ import 'package:chatify/providers/authentication_provider.dart';
 import 'package:chatify/services/navigation_service.dart';
 import 'package:chatify/widgets/custom_input_fields.dart';
 import 'package:chatify/widgets/rounded_button.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get_it/get_it.dart';
 import 'package:provider/provider.dart';
@@ -21,7 +20,7 @@ class _LoginPageState extends State<LoginPage> {
   late double _deviceWidth;
 
   late AuthenticationProvider _auth;
-  late NavigationService _navigationService;
+  late NavigationService navigationService;
 
   final _loginFormKey = GlobalKey<FormState>();
 
@@ -33,7 +32,7 @@ class _LoginPageState extends State<LoginPage> {
     _deviceHight = MediaQuery.sizeOf(context).height;
     _deviceWidth = MediaQuery.sizeOf(context).width;
     _auth = Provider.of<AuthenticationProvider>(context);
-    _navigationService = GetIt.instance.get<NavigationService>();
+    navigationService = GetIt.instance.get<NavigationService>();
     return Scaffold(
       body: GestureDetector(
         onTap: () {
@@ -133,7 +132,9 @@ class _LoginPageState extends State<LoginPage> {
 
   Widget registerAccountLink() {
     return TextButton(
-      onPressed: () {},
+      onPressed: () {
+        navigationService.navigateToRoute('/register');
+      },
       child: const Text(
         "Don't have an account ?",
         style: TextStyle(

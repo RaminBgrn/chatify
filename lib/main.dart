@@ -1,14 +1,11 @@
 import 'package:chatify/pages/home_page.dart';
 import 'package:chatify/pages/login_page.dart';
+import 'package:chatify/pages/register_page.dart';
 import 'package:chatify/pages/splash_page.dart';
 import 'package:chatify/providers/authentication_provider.dart';
-import 'package:chatify/services/cloud_storage_service.dart';
-import 'package:chatify/services/database_service.dart';
-import 'package:chatify/services/media_service.dart';
+
 import 'package:chatify/services/navigation_service.dart';
-import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
-import 'package:get_it/get_it.dart';
 import 'package:provider/provider.dart';
 
 void main() async {
@@ -41,6 +38,7 @@ class MyApp extends StatelessWidget {
           routes: {
             "/splash": (_) => const SplashPage(),
             "/login": (_) => const LoginPage(),
+            "/register": (_) => const RegisterPage(),
             "/home": (_) => const HomePage(),
           }),
     );
