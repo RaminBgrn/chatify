@@ -63,6 +63,7 @@ class AuthenticationProvider extends ChangeNotifier {
     } catch (e) {
       log('Something went wrong while register');
     }
+    return null;
   }
 
   Future<void> logout() async {
