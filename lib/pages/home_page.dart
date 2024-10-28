@@ -17,7 +17,13 @@ class _HomePageState extends State<HomePage> {
     return Scaffold(
       appBar: PreferredSize(
         preferredSize: Size(MediaQuery.sizeOf(context).width, 60),
-        child: const Text('Chatify'),
+        child: const Text(
+          'Chatify',
+          style: TextStyle(
+            fontSize: 24,
+            color: Colors.white,
+          ),
+        ),
       ),
     );
   }
