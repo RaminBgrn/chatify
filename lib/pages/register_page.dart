@@ -2,6 +2,7 @@ import 'package:chatify/providers/authentication_provider.dart';
 import 'package:chatify/services/cloud_storage_service.dart';
 import 'package:chatify/services/database_service.dart';
 import 'package:chatify/services/media_service.dart';
+import 'package:chatify/services/navigation_service.dart';
 import 'package:chatify/widgets/custom_input_fields.dart';
 import 'package:chatify/widgets/rounded_button.dart';
 import 'package:chatify/widgets/rounded_image_network.dart';
@@ -24,6 +25,7 @@ class _RegisterPage extends State<RegisterPage> {
   late AuthenticationProvider _auth;
   late DatabaseService _db;
   late CloudStorageService _cloudStorageService;
+  late NavigationService _navigationService;
 
   String? _name;
   String? _email;
@@ -36,6 +38,7 @@ class _RegisterPage extends State<RegisterPage> {
   Widget build(BuildContext context) {
     _auth = Provider.of<AuthenticationProvider>(context);
     _db = GetIt.instance.get<DatabaseService>();
+    _navigationService = GetIt.instance.get<NavigationService>();
     _cloudStorageService = GetIt.instance.get<CloudStorageService>();
     deviceHight = MediaQuery.sizeOf(context).height;
     deviceWidth = MediaQuery.sizeOf(context).width;
@@ -69,9 +72,17 @@ class _RegisterPage extends State<RegisterPage> {
               title: 'Register',
               buttonHight: deviceHight * 0.065,
               buttonWidth: deviceWidth * 0.65,
-              onPressed: () {
+              onPressed: () async {
                 if (_registerFormKey.currentState!.validate() &&
-                    _profileImageFile != null) {}
+                    _profileImageFile != null) {
+                  _registerFormKey.currentState!.save();
+                  String? uid = await _auth.registerUserUsingEmailAndPassword(
+                      _email!, _password!);
+                  String? imageUrl = await _cloudStorageService
+                      .saveUserImageToStorage(uid!, _profileImageFile!);
+                  await _db.createUser(uid, _email!, _name!, imageUrl!);
+                  _navigationService.goBack();
+                }
               },
             ),
           ],
