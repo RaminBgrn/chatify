@@ -1,3 +1,5 @@
+import 'package:chatify/pages/chats_page.dart';
+import 'package:chatify/pages/user_page.dart';
 import 'package:flutter/material.dart';
 
 class HomePage extends StatefulWidget {
@@ -10,12 +12,8 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   int _currentPage = 0;
   final List<Widget> _pages = [
-    Container(
-      color: Colors.red,
-    ),
-    Container(
-      color: Colors.amber,
-    )
+    const ChatsPage(),
+    const UserPage(),
   ];
 
   @override
@@ -28,20 +26,32 @@ class _HomePageState extends State<HomePage> {
       body: _pages[_currentPage],
       bottomNavigationBar: BottomNavigationBar(
         backgroundColor: const Color.fromRGBO(36, 35, 40, 1.0),
+        selectedItemColor: Colors.blue,
+        unselectedItemColor: Colors.grey,
         currentIndex: _currentPage,
         onTap: (index) => setState(() {
           _currentPage = index;
         }),
         items: const [
           BottomNavigationBarItem(
+            activeIcon: Icon(
+              Icons.chat_bubble_sharp,
+              color: Colors.blue,
+            ),
             icon: Icon(
               Icons.chat_bubble_sharp,
+              color: Colors.grey,
             ),
             label: "Chats",
           ),
           BottomNavigationBarItem(
+            activeIcon: Icon(
+              Icons.supervised_user_circle_sharp,
+              color: Colors.blue,
+            ),
             icon: Icon(
               Icons.supervised_user_circle_sharp,
+              color: Colors.grey,
             ),
             label: "Users",
           ),
