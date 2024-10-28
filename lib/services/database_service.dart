@@ -13,6 +13,20 @@ class DatabaseService {
     return _db.collection(USER_COLLECTION).doc(uid).get();
   }
 
+  Future<void> createUser(
+      String uid, String email, String name, String imageUrl) async {
+    try {
+      await _db.collection(USER_COLLECTION).doc(uid).set({
+        'name': name,
+        'email': email,
+        'image': imageUrl,
+        'last_active': DateTime.now().toUtc(),
+      });
+    } catch (e) {
+      log('Something went wrong $e');
+    }
+  }
+
   Future<void> updateUserLastSeenType(String uid) async {
     try {
       await _db.collection(USER_COLLECTION).doc(uid).update({
