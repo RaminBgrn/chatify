@@ -8,8 +8,13 @@ class ChatsPage extends StatefulWidget {
 }
 
 class ChatsPageState extends State<ChatsPage> {
+  late double _deviceHeight;
+  late double _deviceWidth;
+
   @override
   Widget build(BuildContext context) {
+    _deviceHeight = MediaQuery.sizeOf(context).height;
+    _deviceWidth = MediaQuery.sizeOf(context).width;
     return _buildUi();
   }
 
