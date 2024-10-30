@@ -1,3 +1,4 @@
+import 'package:chatify/widgets/top_bar.dart';
 import 'package:flutter/material.dart';
 
 class ChatsPage extends StatefulWidget {
@@ -19,8 +20,34 @@ class ChatsPageState extends State<ChatsPage> {
   }
 
   Widget _buildUi() {
-    return Scaffold(
-      backgroundColor: Colors.cyan,
+    return Container(
+      padding: EdgeInsets.symmetric(
+        horizontal: _deviceHeight * 0.03,
+        vertical: _deviceWidth * 0.02,
+      ),
+      height: _deviceHeight * 0.98,
+      width: _deviceWidth * 0.97,
+      child: Column(
+        mainAxisSize: MainAxisSize.max,
+        mainAxisAlignment: MainAxisAlignment.start,
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: [
+          SizedBox(
+            height: 24,
+          ),
+          TopBar(
+            barTitle: "Chats",
+            fontSize: 25,
+            primaryAction: GestureDetector(
+              onTap: () {},
+              child: const Icon(
+                Icons.logout,
+                color: Colors.grey,
+              ),
+            ),
+          ),
+        ],
+      ),
     );
   }
 }
