@@ -32,7 +32,7 @@ class ChatsPageState extends State<ChatsPage> {
         mainAxisAlignment: MainAxisAlignment.start,
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
-          SizedBox(
+          const SizedBox(
             height: 24,
           ),
           TopBar(

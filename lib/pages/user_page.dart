@@ -14,7 +14,7 @@ class _UserPageState extends State<UserPage> {
   }
 
   Widget _buildUi() {
-    return Scaffold(
+    return const Scaffold(
       backgroundColor: Colors.blueAccent,
     );
   }
