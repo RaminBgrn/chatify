@@ -32,7 +32,7 @@ class CustomInputFields extends StatelessWidget {
         ),
         label: Text(
           hintText,
-          style: TextStyle(
+          style: const TextStyle(
             fontSize: 14,
             color: Colors.white54,
           ),
