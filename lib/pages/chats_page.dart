@@ -1,3 +1,4 @@
+import 'package:chatify/widgets/custom_list_view_tiles.dart';
 import 'package:chatify/widgets/top_bar.dart';
 import 'package:flutter/material.dart';
 
@@ -46,6 +47,15 @@ class ChatsPageState extends State<ChatsPage> {
               ),
             ),
           ),
+          CustomListViewTiles(
+              height: _deviceHeight * 0.10,
+              title: 'Ramin Bagheriian',
+              subTitle: 'Hello',
+              imagePath:
+                  "https://e7.pngegg.com/pngimages/151/548/png-clipart-chat-room-computer-icons-online-chat-livechat-discussion-group-others-class-monochrome.png",
+              isActive: false,
+              isActivity: false,
+              onTap: () {}),
         ],
       ),
     );
