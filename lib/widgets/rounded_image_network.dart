@@ -4,7 +4,6 @@ import 'dart:io';
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 
-
 class RoundedImageNetwork extends StatelessWidget {
   final String imagePath;
   final double size;
@@ -50,6 +49,36 @@ class RoundedImageLocal extends StatelessWidget {
           fit: BoxFit.cover,
         ),
       ),
+    );
+  }
+}
+
+class RoundedImageNetworkWithStatusIndicator extends RoundedImageNetwork {
+  final bool isActive;
+
+  const RoundedImageNetworkWithStatusIndicator({
+    required Key super.key,
+    required super.imagePath,
+    required super.size,
+    required this.isActive,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Stack(
+      clipBehavior: Clip.none,
+      alignment: Alignment.bottomRight,
+      children: [
+        super.build(context),
+        Container(
+          height: size * 0.20,
+          width: size * 0.20,
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(100),
+            color: isActive ? Colors.green : Colors.red,
+          ),
+        ),
+      ],
     );
   }
 }
