@@ -1,5 +1,6 @@
 import 'package:chatify/widgets/rounded_image_network.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
 
 class CustomListViewTiles extends StatelessWidget {
   final double height;
@@ -39,14 +40,26 @@ class CustomListViewTiles extends StatelessWidget {
           fontWeight: FontWeight.w500,
         ),
       ),
-      subtitle: Text(
-        subTitle,
-        style: const TextStyle(
-          fontSize: 14,
-          color: Colors.grey,
-          fontWeight: FontWeight.w300,
-        ),
-      ),
+      subtitle: isActivity
+          ? Row(
+              mainAxisSize: MainAxisSize.max,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              mainAxisAlignment: MainAxisAlignment.start,
+              children: [
+                SpinKitThreeBounce(
+                  color: Colors.white38,
+                  size: height * 0.10,
+                )
+              ],
+            )
+          : Text(
+              subTitle,
+              style: const TextStyle(
+                fontSize: 14,
+                color: Colors.grey,
+                fontWeight: FontWeight.w300,
+              ),
+            ),
     );
   }
 }
