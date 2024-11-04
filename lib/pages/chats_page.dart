@@ -80,7 +80,7 @@ class ChatsPageState extends State<ChatsPage> {
         title: 'Ramin Bagheriian',
         subTitle: 'Hello',
         imagePath:
-            "https://e7.pngegg.com/pngimages/151/548/png-clipart-chat-room-computer-icons-online-chat-livechat-discussion-group-others-class-monochrome.png",
+            "https://blob.sololearn.com/avatars/553603bf-9052-418d-8799-b0af341003e7.jpg",
         isActive: false,
         isActivity: false,
         onTap: () {});

@@ -3,7 +3,6 @@ import 'package:chatify/pages/login_page.dart';
 import 'package:chatify/pages/register_page.dart';
 import 'package:chatify/pages/splash_page.dart';
 import 'package:chatify/providers/authentication_provider.dart';
-import 'package:chatify/providers/chats_page_provider.dart';
 
 import 'package:chatify/services/navigation_service.dart';
 import 'package:flutter/material.dart';
